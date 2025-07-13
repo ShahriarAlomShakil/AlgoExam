@@ -153,30 +153,61 @@ Algorithms/
    - **Best for**: Small arrays, nearly sorted data, online algorithms
    - **Key properties**: Stable, in-place, adaptive (performs well on nearly sorted data)
    - **Time**: O(n²) worst/average, O(n) best case | **Space**: O(1)
+   - **Algorithm Steps**:
+     1. Start with the second element (index 1) as the current element
+     2. Compare current element with elements in the sorted portion (left side)
+     3. Shift all larger elements one position to the right
+     4. Insert current element in its correct position
+     5. Repeat for all remaining elements
 
 2. **Merge Sort** - Divide and conquer sorting algorithm
    - **How it works**: Recursively divides array into halves, sorts them, then merges sorted halves
    - **Best for**: Large datasets, when stability is required, external sorting
    - **Key properties**: Stable, not in-place, consistent performance
    - **Time**: O(n log n) all cases | **Space**: O(n)
+   - **Algorithm Steps**:
+     1. Divide the array into two halves
+     2. Recursively sort the left half
+     3. Recursively sort the right half
+     4. Merge the two sorted halves:
+        - Compare elements from both halves
+        - Place smaller element in result array
+        - Continue until all elements are merged
 
 3. **Quick Sort** - Efficient divide and conquer sorting algorithm
    - **How it works**: Selects pivot, partitions array around pivot, recursively sorts subarrays
    - **Best for**: General purpose sorting, when average performance matters
    - **Key properties**: Not stable, in-place, cache-efficient
    - **Time**: O(n log n) average, O(n²) worst case | **Space**: O(log n)
+   - **Algorithm Steps**:
+     1. Choose a pivot element (usually last element)
+     2. Partition array: elements ≤ pivot on left, elements > pivot on right
+     3. Place pivot in its final sorted position
+     4. Recursively apply quicksort to left and right subarrays
+     5. Base case: arrays with 0 or 1 element are already sorted
 
 4. **Randomized Quick Sort** - Quick sort with random pivot selection
    - **How it works**: Same as quicksort but chooses random pivot to avoid worst-case scenarios
    - **Best for**: Avoiding worst-case performance on specific input patterns
    - **Key properties**: Expected O(n log n) performance regardless of input
    - **Time**: O(n log n) expected | **Space**: O(log n)
+   - **Algorithm Steps**:
+     1. Generate random index and swap with last element
+     2. Use last element as pivot (now random)
+     3. Follow same partitioning process as regular quicksort
+     4. Recursively sort left and right subarrays
 
 5. **Heap Sort** - Comparison-based sorting using binary heap
    - **How it works**: Builds max-heap, repeatedly extracts maximum element
    - **Best for**: When guaranteed O(n log n) performance is needed with O(1) space
    - **Key properties**: Not stable, in-place, consistent performance
    - **Time**: O(n log n) all cases | **Space**: O(1)
+   - **Algorithm Steps**:
+     1. Build max-heap from input array (heapify process)
+     2. Swap root (maximum) with last element
+     3. Reduce heap size by 1
+     4. Restore heap property by heapifying root
+     5. Repeat steps 2-4 until heap size becomes 1
 
 ### Heap Data Structure (06)
 6. **Priority Queue using Heap** - Complete binary tree with heap property
@@ -185,6 +216,21 @@ Algorithms/
    - **Best for**: Task scheduling, graph algorithms (Dijkstra, Prim), event simulation
    - **Key properties**: Complete binary tree, efficient priority operations
    - **Time**: O(log n) insert/extract, O(1) peek | **Space**: O(n)
+   - **Algorithm Steps**:
+     - **Insert Operation**:
+       1. Add new element at the end of heap
+       2. Compare with parent and swap if heap property violated
+       3. Continue swapping up until heap property restored
+     - **Extract-Max Operation**:
+       1. Store root value (maximum)
+       2. Replace root with last element
+       3. Remove last element
+       4. Heapify down from root to restore heap property
+     - **Heapify Process**:
+       1. Compare parent with left and right children
+       2. Find largest among the three
+       3. If parent is not largest, swap with largest child
+       4. Recursively heapify the affected subtree
 
 ### Dynamic Programming (07-10)
 7. **Rod Cutting Problem** - Optimization problem using dynamic programming
@@ -193,6 +239,13 @@ Algorithms/
    - **Key insight**: Optimal substructure - optimal solution contains optimal solutions to subproblems
    - **Recurrence**: revenue[i] = max(price[j] + revenue[i-j-1]) for all j < i
    - **Time**: O(n²) | **Space**: O(n)
+   - **Algorithm Steps**:
+     1. **Recursive Approach**: For rod of length n, try all possible first cuts
+     2. **Memoization**: Store results in array to avoid recomputation
+     3. **Bottom-up**: Fill table from length 1 to n
+        - For each length i, try all cuts from 1 to i
+        - Take maximum of (price[j] + revenue[i-j]) for all j
+        - Store result in revenue[i]
 
 8. **Matrix Chain Multiplication** - Find optimal parenthesization for matrix multiplication
    - **Problem**: Given chain of matrices, find order that minimizes scalar multiplications
@@ -200,6 +253,14 @@ Algorithms/
    - **Key insight**: Try all possible split points and combine optimal solutions
    - **Recurrence**: dp[i][j] = min(dp[i][k] + dp[k+1][j] + cost(i,k,j)) for all k
    - **Time**: O(n³) | **Space**: O(n²)
+   - **Algorithm Steps**:
+     1. Create 2D table dp[i][j] for storing minimum multiplications for matrices i to j
+     2. Fill diagonal with 0 (single matrix requires 0 multiplications)
+     3. For each chain length from 2 to n:
+        - For each starting position i
+        - Try all possible split points k between i and j
+        - Calculate cost: dp[i][k] + dp[k+1][j] + (dimensions[i] × dimensions[k+1] × dimensions[j+1])
+        - Take minimum cost among all split points
 
 9. **Longest Common Subsequence (LCS)** - Find longest subsequence common to two sequences
    - **Problem**: Given two strings, find length of longest common subsequence
@@ -207,6 +268,14 @@ Algorithms/
    - **Key insight**: If characters match, add 1; else take maximum of excluding either character
    - **Applications**: DNA analysis, file comparison, version control systems
    - **Time**: O(mn) | **Space**: O(mn), can be optimized to O(min(m,n))
+   - **Algorithm Steps**:
+     1. Create 2D table dp[m+1][n+1] initialized with 0
+     2. For each character in first string (i from 1 to m):
+        - For each character in second string (j from 1 to n):
+          - If characters match: dp[i][j] = dp[i-1][j-1] + 1
+          - Else: dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+     3. Result is stored in dp[m][n]
+     4. **Path reconstruction**: Trace back through table to find actual LCS
 
 10. **0/1 Knapsack Problem** - Classic optimization problem with weight constraint
     - **Problem**: Given items with weights and values, maximize value within weight limit
@@ -214,6 +283,14 @@ Algorithms/
     - **Key insight**: For each item, decide whether to include it or not
     - **Recurrence**: dp[i][w] = max(dp[i-1][w], dp[i-1][w-weight[i]] + value[i])
     - **Time**: O(nW) | **Space**: O(nW), can be optimized to O(W)
+    - **Algorithm Steps**:
+      1. Create 2D table dp[n+1][W+1] initialized with 0
+      2. For each item i from 1 to n:
+         - For each weight w from 1 to W:
+           - If item weight > w: dp[i][w] = dp[i-1][w] (can't include)
+           - Else: dp[i][w] = max(dp[i-1][w], dp[i-1][w-weight[i]] + value[i])
+      3. Result is dp[n][W]
+      4. **Item tracking**: Trace back to find which items are included
 
 ### Greedy Algorithms (11-13)
 11. **Fractional Knapsack** - Greedy approach to maximize value with weight constraint
@@ -222,6 +299,15 @@ Algorithms/
     - **Key insight**: Greedy choice property - locally optimal choices lead to global optimum
     - **Difference from 0/1**: Items can be taken partially
     - **Time**: O(n log n) for sorting | **Space**: O(1)
+    - **Algorithm Steps**:
+      1. Calculate value-to-weight ratio for each item
+      2. Sort items in descending order of ratio
+      3. Initialize total value = 0, remaining capacity = W
+      4. For each item in sorted order:
+         - If item weight ≤ remaining capacity: take entire item
+         - Else: take fraction (remaining capacity / item weight)
+         - Update total value and remaining capacity
+         - If capacity becomes 0, stop
 
 12. **Activity Selection** - Select maximum number of non-overlapping activities
     - **Problem**: Given start and end times, select maximum non-conflicting activities
@@ -229,6 +315,15 @@ Algorithms/
     - **Key insight**: Activity that finishes earliest leaves most room for remaining activities
     - **Applications**: Meeting scheduling, resource allocation
     - **Time**: O(n log n) for sorting | **Space**: O(1)
+    - **Algorithm Steps**:
+      1. Sort activities by their end times
+      2. Select first activity (earliest ending)
+      3. For each subsequent activity:
+         - If start time ≥ end time of last selected activity:
+           - Select this activity
+           - Update last selected end time
+         - Else: skip this activity
+      4. Return count or list of selected activities
 
 13. **Huffman Coding** - Optimal prefix-free encoding algorithm
     - **Problem**: Create variable-length encoding that minimizes total encoding length
@@ -236,6 +331,17 @@ Algorithms/
     - **Key insight**: More frequent characters get shorter codes
     - **Properties**: Prefix-free (no code is prefix of another), optimal compression
     - **Time**: O(n log n) | **Space**: O(n)
+    - **Algorithm Steps**:
+      1. Count frequency of each character
+      2. Create leaf nodes for each character with their frequencies
+      3. Build min-heap of all leaf nodes
+      4. While heap has more than one node:
+         - Extract two nodes with minimum frequency
+         - Create new internal node with frequency = sum of two nodes
+         - Make extracted nodes children of new node
+         - Insert new node back into heap
+      5. Root of remaining tree is root of Huffman tree
+      6. Assign codes: left edge = '0', right edge = '1'
 
 ### Graph Algorithms (14-19)
 14. **BFS Shortest Path** - Breadth-first search for unweighted shortest paths
@@ -244,6 +350,16 @@ Algorithms/
     - **Key properties**: Finds shortest path, explores all nodes at distance k before k+1
     - **Data structure**: Queue for frontier management
     - **Time**: O(V + E) | **Space**: O(V)
+    - **Algorithm Steps**:
+      1. Initialize queue with source vertex, mark as visited
+      2. Initialize distance array with infinity, set source distance = 0
+      3. While queue is not empty:
+         - Dequeue vertex u
+         - For each unvisited neighbor v of u:
+           - Mark v as visited
+           - Set distance[v] = distance[u] + 1
+           - Set parent[v] = u (for path reconstruction)
+           - Enqueue v
 
 15. **DFS Traversal** - Depth-first search for graph exploration
     - **How it works**: Explores as far as possible before backtracking
@@ -251,6 +367,17 @@ Algorithms/
     - **Key properties**: Uses stack (recursive or explicit), explores one branch completely
     - **Variants**: Pre-order, post-order traversal
     - **Time**: O(V + E) | **Space**: O(V) for recursion stack
+    - **Algorithm Steps**:
+      1. **Recursive DFS**:
+         - Mark current vertex as visited
+         - Process vertex (print/store)
+         - For each unvisited neighbor: recursively call DFS
+      2. **Iterative DFS**:
+         - Push source vertex onto stack
+         - While stack is not empty:
+           - Pop vertex u
+           - If u not visited: mark as visited, process u
+           - Push all unvisited neighbors of u onto stack
 
 16. **Graph Connectivity** - Determine if graph is connected
     - **Problem**: Check if there's a path between every pair of vertices
@@ -258,6 +385,12 @@ Algorithms/
     - **Applications**: Network reliability, social network analysis
     - **Extensions**: Strong connectivity (directed graphs), bridge finding
     - **Time**: O(V + E) | **Space**: O(V)
+    - **Algorithm Steps**:
+      1. Choose any vertex as starting point
+      2. Run DFS/BFS from starting vertex
+      3. Count number of vertices visited
+      4. If visited count == total vertices: graph is connected
+      5. Else: graph is disconnected
 
 17. **Topological Sorting** - Linear ordering of vertices in directed acyclic graph
     - **Problem**: Order vertices such that for every edge (u,v), u comes before v
@@ -265,6 +398,17 @@ Algorithms/
     - **Algorithms**: DFS-based (using finish times), Kahn's algorithm (using in-degrees)
     - **Key requirement**: Graph must be acyclic (DAG)
     - **Time**: O(V + E) | **Space**: O(V)
+    - **Algorithm Steps (DFS-based)**:
+      1. Run DFS on entire graph
+      2. When vertex finishes (all neighbors explored), add to front of result list
+      3. Final list gives topological order
+    - **Algorithm Steps (Kahn's)**:
+      1. Calculate in-degree for each vertex
+      2. Add all vertices with in-degree 0 to queue
+      3. While queue not empty:
+         - Remove vertex u, add to result
+         - For each neighbor v of u: decrease in-degree[v]
+         - If in-degree[v] becomes 0: add v to queue
 
 18. **Kruskal's MST** - Minimum spanning tree using edge-based approach
     - **How it works**: Sort edges by weight, add edges that don't create cycles
@@ -272,6 +416,15 @@ Algorithms/
     - **Key insight**: Always add the minimum weight edge that doesn't create a cycle
     - **Applications**: Network design, clustering, approximation algorithms
     - **Time**: O(E log E) | **Space**: O(V)
+    - **Algorithm Steps**:
+      1. Sort all edges by weight in ascending order
+      2. Initialize disjoint set for all vertices
+      3. Initialize empty MST
+      4. For each edge (u,v) in sorted order:
+         - If u and v are in different components (find(u) ≠ find(v)):
+           - Add edge to MST
+           - Union the components containing u and v
+         - If MST has V-1 edges: stop
 
 19. **Prim's MST** - Minimum spanning tree using vertex-based approach
     - **How it works**: Start from arbitrary vertex, always add minimum edge to new vertex
@@ -279,6 +432,14 @@ Algorithms/
     - **Key insight**: Grow MST one vertex at a time by adding cheapest connection
     - **Better for**: Dense graphs (when E is close to V²)
     - **Time**: O(V²) with array, O(E log V) with heap | **Space**: O(V)
+    - **Algorithm Steps**:
+      1. Start with arbitrary vertex, add to MST
+      2. Initialize priority queue with all edges from starting vertex
+      3. While MST doesn't have all vertices:
+         - Extract minimum weight edge (u,v) where u ∈ MST, v ∉ MST
+         - Add v to MST, add edge (u,v) to MST
+         - Add all edges from v to vertices not in MST to priority queue
+      4. Continue until all vertices are included
 
 ### Shortest Path Algorithms (20-23)
 20. **Floyd-Warshall Algorithm** - All-pairs shortest path using dynamic programming
@@ -287,6 +448,15 @@ Algorithms/
     - **Key insight**: Optimal path from i to j either uses vertex k or doesn't
     - **Applications**: Dense graphs, transitive closure, detecting negative cycles
     - **Time**: O(V³) | **Space**: O(V²)
+    - **Algorithm Steps**:
+      1. Initialize distance matrix: dist[i][j] = weight of edge (i,j), ∞ if no edge
+      2. Set dist[i][i] = 0 for all vertices i
+      3. For each intermediate vertex k from 0 to V-1:
+         - For each source vertex i from 0 to V-1:
+           - For each destination vertex j from 0 to V-1:
+             - If dist[i][k] + dist[k][j] < dist[i][j]:
+               - Update dist[i][j] = dist[i][k] + dist[k][j]
+      4. Check for negative cycles: if dist[i][i] < 0 for any i
 
 21. **Modified Floyd-Warshall** - Floyd-Warshall with path reconstruction
     - **Enhancement**: Stores predecessor information to reconstruct actual paths
@@ -294,6 +464,14 @@ Algorithms/
     - **Applications**: When you need the actual shortest paths, not just distances
     - **Path reconstruction**: Follow next pointers from source to destination
     - **Time**: O(V³) | **Space**: O(V²)
+    - **Algorithm Steps**:
+      1. Initialize distance and next matrices
+      2. Set next[i][j] = j if there's direct edge from i to j
+      3. Run Floyd-Warshall with additional next matrix updates:
+         - When updating dist[i][j], also set next[i][j] = next[i][k]
+      4. **Path reconstruction**:
+         - Start from source, follow next[current][destination]
+         - Continue until reaching destination
 
 22. **Bellman-Ford Algorithm** - Single-source shortest path with negative edge handling
     - **Problem**: Find shortest paths from source to all vertices, detect negative cycles
@@ -301,6 +479,16 @@ Algorithms/
     - **Key advantage**: Handles negative edge weights, detects negative cycles
     - **Applications**: Currency arbitrage, distance vector routing protocols
     - **Time**: O(VE) | **Space**: O(V)
+    - **Algorithm Steps**:
+      1. Initialize distance[source] = 0, distance[all others] = ∞
+      2. Repeat V-1 times:
+         - For each edge (u,v) with weight w:
+           - If distance[u] + w < distance[v]:
+             - Update distance[v] = distance[u] + w
+             - Set parent[v] = u
+      3. **Negative cycle detection**: Repeat step 2 once more
+         - If any distance is updated: negative cycle exists
+      4. **Path reconstruction**: Follow parent pointers backward
 
 23. **Dijkstra's Algorithm** - Single-source shortest path for non-negative weights
     - **Problem**: Find shortest paths from source to all vertices (non-negative weights only)
@@ -308,6 +496,18 @@ Algorithms/
     - **Data structure**: Priority queue for efficient minimum distance selection
     - **Applications**: GPS navigation, network routing, social networks
     - **Time**: O(V²) with array, O((V + E) log V) with heap | **Space**: O(V)
+    - **Algorithm Steps**:
+      1. Initialize distance[source] = 0, distance[all others] = ∞
+      2. Add all vertices to priority queue (min-heap based on distance)
+      3. While priority queue is not empty:
+         - Extract vertex u with minimum distance
+         - For each neighbor v of u:
+           - Calculate new_distance = distance[u] + weight(u,v)
+           - If new_distance < distance[v]:
+             - Update distance[v] = new_distance
+             - Set parent[v] = u
+             - Update v's priority in queue
+      4. **Path reconstruction**: Follow parent pointers backward
 
 ### Backtracking (25-26)
 25. **N-Queens Problem** - Place N queens on N×N board such that no two queens attack each other
@@ -317,6 +517,18 @@ Algorithms/
     - **Key technique**: Use backtracking with pruning to avoid exploring invalid states
     - **Applications**: Constraint satisfaction, puzzle solving, resource allocation
     - **Time**: O(N!) | **Space**: O(N)
+    - **Algorithm Steps**:
+      1. Start with empty board and row 0
+      2. For current row, try placing queen in each column:
+         - Check if placement is safe (no conflicts with existing queens)
+         - If safe: place queen, recursively solve for next row
+         - If recursive call succeeds: return true
+         - If recursive call fails: remove queen (backtrack)
+      3. **Safety check**: For position (row, col), check:
+         - No queen in same column
+         - No queen in left diagonal (row-col constant)
+         - No queen in right diagonal (row+col constant)
+      4. If all rows filled successfully: solution found
 
 26. **Sum of Subsets** - Find all subsets with given sum using backtracking
     - **Problem**: Given set of integers and target sum, find all subsets that sum to target
@@ -324,6 +536,16 @@ Algorithms/
     - **Optimizations**: Sort array, prune when remaining sum is impossible
     - **Applications**: Partition problems, resource allocation, combination problems
     - **Time**: O(2ⁿ) | **Space**: O(n) for recursion stack
+    - **Algorithm Steps**:
+      1. Sort the input array (for optimization)
+      2. Start with empty subset and index 0
+      3. For each element at current index:
+         - **Include element**: Add to current subset, recurse with reduced target
+         - **Exclude element**: Skip element, recurse with same target
+      4. **Base cases**:
+         - If target sum = 0: found valid subset
+         - If target sum < 0 or index >= array size: backtrack
+      5. **Pruning**: If remaining elements' sum < target: impossible to reach target
 
 ### Number Theory (27)
 27. **Modular Exponentiation** - Compute (base^exponent) % modulus efficiently
@@ -333,6 +555,16 @@ Algorithms/
     - **Applications**: Cryptography (RSA), primality testing, discrete logarithms
     - **Algorithm**: Square-and-multiply method
     - **Time**: O(log exponent) | **Space**: O(1)
+    - **Algorithm Steps**:
+      1. Initialize result = 1, base = base % modulus
+      2. While exponent > 0:
+         - If exponent is odd: result = (result * base) % modulus
+         - Exponent = exponent >> 1 (divide by 2)
+         - Base = (base * base) % modulus (square the base)
+      3. Return result
+      4. **Key insight**: Use binary representation of exponent
+         - If bit is 1: multiply current power of base
+         - Always square base for next bit position
 
 ### String Algorithms (30)
 30. **Rabin-Karp Algorithm** - String matching using rolling hash technique
@@ -342,6 +574,19 @@ Algorithms/
     - **Advantage**: Good average case performance, easy to extend to multiple patterns
     - **Applications**: Plagiarism detection, DNA sequence matching, web search
     - **Time**: O(n+m) average, O(nm) worst case | **Space**: O(1)
+    - **Algorithm Steps**:
+      1. Calculate hash value of pattern
+      2. Calculate hash value of first window of text (same size as pattern)
+      3. For each position in text:
+         - If hash values match: check character by character (handle hash collisions)
+         - If characters match: pattern found at current position
+         - Calculate hash of next window using rolling hash:
+           - Remove contribution of leftmost character
+           - Add contribution of new rightmost character
+      4. **Rolling hash formula**: 
+         - Remove: hash = (hash - text[i] * h) / base
+         - Add: hash = hash * base + text[i+m]
+         - Where h = base^(m-1) % prime
 
 ## Algorithm Categories and When to Use Them
 *📚 Study Guide Section*
