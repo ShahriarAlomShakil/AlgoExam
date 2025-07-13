@@ -2,6 +2,107 @@
 
 This repository contains comprehensive implementations of algorithm problems covering sorting, dynamic programming, greedy algorithms, graph algorithms, shortest path algorithms, backtracking, number theory, and string algorithms.
 
+## Table of Contents
+
+### 📁 [Folder Structure](#folder-structure)
+
+### 🔧 [Problems Implemented](#problems-implemented)
+- **[Sorting Algorithms (01-05)](#sorting-algorithms-01-05)**
+  - [01. Insertion Sort](#1-insertion-sort---simple-comparison-based-sorting-algorithm)
+  - [02. Merge Sort](#2-merge-sort---divide-and-conquer-sorting-algorithm)
+  - [03. Quick Sort](#3-quick-sort---efficient-divide-and-conquer-sorting-algorithm)
+  - [04. Randomized Quick Sort](#4-randomized-quick-sort---quick-sort-with-random-pivot-selection)
+  - [05. Heap Sort](#5-heap-sort---comparison-based-sorting-using-binary-heap)
+
+- **[Heap Data Structure (06)](#heap-data-structure-06)**
+  - [06. Priority Queue using Heap](#6-priority-queue-using-heap---complete-binary-tree-with-heap-property)
+
+- **[Dynamic Programming (07-10)](#dynamic-programming-07-10)**
+  - [07. Rod Cutting Problem](#7-rod-cutting-problem---optimization-problem-using-dynamic-programming)
+  - [08. Matrix Chain Multiplication](#8-matrix-chain-multiplication---find-optimal-parenthesization-for-matrix-multiplication)
+  - [09. Longest Common Subsequence (LCS)](#9-longest-common-subsequence-lcs---find-longest-subsequence-common-to-two-sequences)
+  - [10. 0/1 Knapsack Problem](#10-01-knapsack-problem---classic-optimization-problem-with-weight-constraint)
+
+- **[Greedy Algorithms (11-13)](#greedy-algorithms-11-13)**
+  - [11. Fractional Knapsack](#11-fractional-knapsack---greedy-approach-to-maximize-value-with-weight-constraint)
+  - [12. Activity Selection](#12-activity-selection---select-maximum-number-of-non-overlapping-activities)
+  - [13. Huffman Coding](#13-huffman-coding---optimal-prefix-free-encoding-algorithm)
+
+- **[Graph Algorithms (14-19)](#graph-algorithms-14-19)**
+  - [14. BFS Shortest Path](#14-bfs-shortest-path---breadth-first-search-for-unweighted-shortest-paths)
+  - [15. DFS Traversal](#15-dfs-traversal---depth-first-search-for-graph-exploration)
+  - [16. Graph Connectivity](#16-graph-connectivity---determine-if-graph-is-connected)
+  - [17. Topological Sorting](#17-topological-sorting---linear-ordering-of-vertices-in-directed-acyclic-graph)
+  - [18. Kruskal's MST](#18-kruskals-mst---minimum-spanning-tree-using-edge-based-approach)
+  - [19. Prim's MST](#19-prims-mst---minimum-spanning-tree-using-vertex-based-approach)
+
+- **[Shortest Path Algorithms (20-23)](#shortest-path-algorithms-20-23)**
+  - [20. Floyd-Warshall Algorithm](#20-floyd-warshall-algorithm---all-pairs-shortest-path-using-dynamic-programming)
+  - [21. Modified Floyd-Warshall](#21-modified-floyd-warshall---floyd-warshall-with-path-reconstruction)
+  - [22. Bellman-Ford Algorithm](#22-bellman-ford-algorithm---single-source-shortest-path-with-negative-edge-handling)
+  - [23. Dijkstra's Algorithm](#23-dijkstras-algorithm---single-source-shortest-path-for-non-negative-weights)
+
+- **[Backtracking (25-26)](#backtracking-25-26)**
+  - [25. N-Queens Problem](#25-n-queens-problem---place-n-queens-on-nn-board-such-that-no-two-queens-attack-each-other)
+  - [26. Sum of Subsets](#26-sum-of-subsets---find-all-subsets-with-given-sum-using-backtracking)
+
+- **[Number Theory (27)](#number-theory-27)**
+  - [27. Modular Exponentiation](#27-modular-exponentiation---compute-baseexponent--modulus-efficiently)
+
+- **[String Algorithms (30)](#string-algorithms-30)**
+  - [30. Rabin-Karp Algorithm](#30-rabin-karp-algorithm---string-matching-using-rolling-hash-technique)
+
+### 📚 [Study Guide](#study-guide)
+- **[Algorithm Categories and When to Use Them](#algorithm-categories-and-when-to-use-them)**
+  - [Divide and Conquer](#divide-and-conquer)
+  - [Dynamic Programming](#dynamic-programming)
+  - [Greedy Algorithms](#greedy-algorithms)
+  - [Graph Algorithms](#graph-algorithms)
+  - [Backtracking](#backtracking)
+
+- **[Common Problem-Solving Patterns](#common-problem-solving-patterns)**
+  - [Optimization Problems](#1-optimization-problems)
+  - [Search Problems](#2-search-problems)
+  - [Sorting and Selection](#3-sorting-and-selection)
+
+- **[Space-Time Trade-offs](#space-time-trade-offs)**
+  - [Time Optimization](#time-optimization)
+  - [Space Optimization](#space-optimization)
+
+- **[Common Mistakes and Tips](#common-mistakes-and-tips)**
+  - [Dynamic Programming](#dynamic-programming-1)
+  - [Graph Algorithms](#graph-algorithms-1)
+  - [Greedy Algorithms](#greedy-algorithms-1)
+  - [Sorting](#sorting)
+
+### ⚡ [Implementation Guide](#implementation-guide)
+- **[How to Compile and Run](#how-to-compile-and-run)**
+- **[Key Features](#key-features)**
+
+### 📊 [Complexity Analysis](#complexity-analysis)
+- **[Time and Space Complexities](#time-and-space-complexities)**
+  - [Sorting Algorithms](#sorting-algorithms)
+  - [Data Structures](#data-structures)
+  - [Dynamic Programming](#dynamic-programming-2)
+  - [Greedy Algorithms](#greedy-algorithms-2)
+  - [Graph Algorithms](#graph-algorithms-2)
+  - [Shortest Path](#shortest-path)
+  - [Backtracking](#backtracking-1)
+  - [Number Theory](#number-theory)
+  - [String Algorithms](#string-algorithms)
+
+### 🎯 [Exam Preparation](#exam-preparation)
+- **[Notes for Exam Preparation](#notes-for-exam-preparation)**
+  - [Algorithm Selection Guide](#algorithm-selection-guide)
+  - [Key Concepts to Remember](#key-concepts-to-remember)
+  - [Problem-Solving Strategy](#problem-solving-strategy)
+  - [Implementation Tips](#implementation-tips)
+  - [Complexity Analysis Shortcuts](#complexity-analysis-shortcuts)
+  - [Common Exam Questions](#common-exam-questions)
+  - [Memory Aids](#memory-aids)
+
+---
+
 ## Folder Structure
 
 ```
@@ -243,6 +344,7 @@ Algorithms/
     - **Time**: O(n+m) average, O(nm) worst case | **Space**: O(1)
 
 ## Algorithm Categories and When to Use Them
+*📚 Study Guide Section*
 
 ### Divide and Conquer
 - **Algorithms**: Merge Sort, Quick Sort, Binary Search
@@ -327,6 +429,7 @@ Algorithms/
 - **Tip**: Consider hybrid approaches for real-world use
 
 ## How to Compile and Run
+*⚡ Implementation Guide Section*
 
 For any C++ file:
 ```bash
@@ -349,6 +452,7 @@ g++ 01_insertion_sort.cpp -o insertion_sort
 - **Well Commented**: Clear comments explaining the logic
 
 ## Time and Space Complexities
+*📊 Complexity Analysis Section*
 
 ### Sorting Algorithms
 - **Insertion Sort**: Time O(n²), Space O(1)
@@ -393,6 +497,7 @@ g++ 01_insertion_sort.cpp -o insertion_sort
 - **Rabin-Karp**: Time O(nm) worst case, O(n+m) average, Space O(1)
 
 ## Notes for Exam Preparation
+*🎯 Exam Preparation Section*
 
 ### Algorithm Selection Guide
 - **Sorting**: Use merge sort for stability, quick sort for average performance, heap sort for guaranteed O(n log n)
