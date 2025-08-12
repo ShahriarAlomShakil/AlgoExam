@@ -24,17 +24,6 @@ int main()
     addEdge(3, 5, 14);
     addEdge(4, 5, 10);
 
-    cout << "Graph (Adjacency List with weights):\n";
-    for (int i = 0; i < V; i++)
-    {
-        cout << "Vertex " << i << ": ";
-        for (auto edge : adj[i])
-        {
-            cout << "(" << edge.first << "," << edge.second << ") ";
-        }
-        cout << endl;
-    }
-
     int source = 0;
     int dist[V];
     // Use set to get min distance vertex efficiently
