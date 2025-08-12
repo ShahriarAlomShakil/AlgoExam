@@ -1,6 +1,6 @@
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
+#include <cstdlib> //Remember to include this for rand() and srand()
+#include <ctime> // for time()
 using namespace std;
 
 int partition(int arr[], int low, int high) {
